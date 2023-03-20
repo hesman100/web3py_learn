@@ -1,6 +1,7 @@
 
 
 import json
+import os
 from web3 import Web3, HTTPProvider
 
 from solcx import install_solc, compile_source
@@ -48,9 +49,18 @@ web3 = Web3(Web3.HTTPProvider('https://goerli.infura.io/v3/bdf81e81d0a447a1ac196
 # set pre-funded account as sender
 #  web3.eth.default_account = web3.eth.accounts[0]
 # 3. Create address sender   #goerli
+#safety prv_key:
+os_private_key =  os.environ.get("PRIVATE_KEY")
+assert os_private_key is not None, "You must set PRIVATE_KEY environment variable"
+assert os_private_key.startswith("0x"), "Private key must start with 0x hex prefix"
+os_test_address =  os.environ.get("TEST_ADDRESS")
+assert os_test_address is not None, "You must set TEST_ADDRESS environment variable"
+assert os_test_address.startswith("0x"), "Address must start with 0x hex prefix"
+print (f"From this address {os_test_address}   || prv_key:    {os_private_key} ")
+print (f"")
 account_from = {
-    'private_key': 'f61e3e3257460632f8e5ee74dc523b9fd3b6a778504515114dfcf9aa5747276b',
-    'address': '0x8958EB26b43Fb7d36C2D085cAB5a1D4075648DeA',
+    'private_key': os_private_key,
+    'address':     os_test_address,
 }
 
 # contract instance need_to_deployed ( contract_ntd)
@@ -71,7 +81,7 @@ tx_hash = web3.eth.send_raw_transaction(tx_create.rawTransaction)
 tx_receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
 
 print(f'Contract deployed at address: { tx_receipt.contractAddress }')
-print "## =================== done ==== "
+print ("## =================== done ==== ")
 
 
 # my 1st contract : 0xabfe5186B5B6115393E18eA3d15F24cbaaAa4F58
