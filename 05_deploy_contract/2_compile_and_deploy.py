@@ -71,6 +71,7 @@ tx_hash = web3.eth.send_raw_transaction(tx_create.rawTransaction)
 tx_receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
 
 print(f'Contract deployed at address: { tx_receipt.contractAddress }')
+print "## =================== done ==== "
 
 
 # my 1st contract : 0xabfe5186B5B6115393E18eA3d15F24cbaaAa4F58
