@@ -50,7 +50,7 @@ else:
         last_four_chars = m_ens_name[-4:]
         # Check if the last four characters are '.eth'
         if last_four_chars != '.eth':
-            print("Last four characters of the argument are not '.eth', so I added it automatically")     
+#              print("Last four characters of the argument are not '.eth', so I added it automatically")     
             m_ens_name += '.eth'
         owner_address = ns.owner(m_ens_name)
         if owner_address == '0x0000000000000000000000000000000000000000':
